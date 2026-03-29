@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WashWise</title>
+<style>
+body{margin:0;font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#e0f7fa,#f1f8e9);scroll-behavior:smooth}
+
+/* HEADER */
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 30px;
+    background: linear-gradient(to right, #0f2027, #2c5364);
+    color: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+header h1{
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+nav a{
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.3s;
+}
+nav a:hover{
+    color: #ffeb3b;
+    border-bottom: 2px solid #ffeb3b;
+    padding-bottom: 3px;
+}
+nav a:last-child{
+    background: #ffeb3b;
+    color: black;
+    padding: 5px 12px;
+    border-radius: 5px;
+}
+section{
+ padding:100px 40px 40px;
+ min-height:100vh;
+ display:none;
+ animation:fadeIn 0.6s;
+}
+
+.active{display:block}
+
+.card{
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.card:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* IMAGE GRID */
+.grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.grid div{
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    text-align: center;
+    transition: 0.3s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.grid div img{
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+.grid div:hover{
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+button{
+ background:linear-gradient(90deg,#ff9800,#ff5722);
+ color:white;
+ border:none;
+ padding:12px 25px;
+ border-radius:10px;
+ cursor:pointer;
+}
+
+/* POPUP */
+.modal{
+ display:none;
+ position:fixed;
+ top:0;left:0;
+ width:100%;height:100%;
+ background:rgba(0,0,0,0.6);
+ justify-content:center;
+ align-items:center;
+}
+.modal-content{
+ background:white;
+ padding:20px;
+ border-radius:10px;
+ width:300px;
+ text-align:center;
+ animation:slideUp 0.4s;
+}
+
+.qty{display:flex;justify-content:center;gap:10px;margin:10px}
+
+.success{
+ display:none;
+ text-align:center;
+ padding:100px;
+ font-size:22px;
+}
+.logo img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{transform:translateY(50px);opacity:0}to{transform:translateY(0);opacity:1}}
+</style>
+</head>
+<body>
+
+<header>
+    <div class="logo">
+    <img src="src/washwise.png">
+    <h1>WashWise</h1>
+</div>
+<nav>
+<a onclick="showSection('about')">About Us</a>
+<a onclick="showSection('problems')">Problems</a>
+<a onclick="showSection('solutions')">Solutions</a>
+<a onclick="showSection('range')">Product Range</a>
+<a onclick="showSection('pricing')">Pricing</a>
+</nav>
+</header>
+
+<!-- ABOUT -->
+<section id="about" class="active">
+<div class="card">
+<h2>Our Story</h2>
+<p>WashWise started from a simple hostel problem. We saw excessive plastic waste and harmful chemical detergents everywhere. We wanted something smarter, portable, and eco-friendly.</p>
+
+<h3>Our Aim</h3>
+<p>To create sustainable, affordable, and easy-to-use cleaning solutions for everyone.</p>
+</div>
+</section>
+
+<!-- PROBLEMS -->
+<section id="problems">
+<div class="card">
+<h2>Problems</h2>
+<ul>
+<li>Harsh chemicals damaging skin</li>
+<li>Plastic waste from detergent bottles</li>
+<li>Bulky and hard-to-carry products</li>
+</ul>
+</div>
+</section>
+
+<!-- SOLUTIONS -->
+<section id="solutions">
+<div class="card">
+<h2>Our Solutions</h2>
+<ul>
+<li>Eco-friendly dissolvable sheets</li>
+<li>Zero plastic packaging</li>
+<li>Compact & travel-friendly</li>
+</ul>
+</div>
+</section>
+
+<!-- RANGE -->
+<section id="range">
+<div class="card">
+<h2>Our Product Range</h2>
+<div class="grid">
+<div class="card">
+<img src="https://thesustainabilityproject.life/shop/wp-content/uploads/sites/2/2021/07/Laundry-Sheets-4EM.jpg"><p>Laundry Sheets</p>
+</div>
+<div class="card">
+<img src="https://thumbs.dreamstime.com/b/eco-friendly-cleaning-products-set-isolated-white-background-collection-eco-friendly-cleaning-products-sustainable-366008391.jpg"><p>Floor Cleaner</p>
+</div>
+<div class="card">
+<img src="https://i.pinimg.com/736x/43/bb/aa/43bbaa3999088a173925b1c4c30e602f.jpg">
+<p>Table Cleaner</p>
+</div>
+<div class="card">
+<img src="https://i.pinimg.com/736x/d5/90/ec/d590ec3c3cd4e1291b7649677b861b09.jpg">
+<p>Dishwash Soap</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+<div class="card">
+<h2>Pricing</h2>
+<p>₹99 per pack</p>
+<button onclick="openModal()">Buy Now</button>
+</div>
+</section>
+
+<!-- POPUP -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<h3>Order</h3>
+<p>₹99 per pack</p>
+<div class="qty">
+<button onclick="dec()">-</button>
+<span id="q">1</span>
+<button onclick="inc()">+</button>
+</div>
+<p>Total ₹<span id="total">99</span></p>
+<button onclick="addCart()">Add to Cart</button>
+</div>
+</div>
+
+<!-- SUCCESS -->
+<div class="success" id="success">
+<h1>✅ Payment Successful</h1>
+<p>Thank you for choosing WashWise!</p>
+</div>
+
+<script>
+let qty=1,price=99;
+
+function showSection(id){
+ document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
+
+function openModal(){document.getElementById('modal').style.display='flex'}
+function inc(){qty++;update()}
+function dec(){if(qty>1)qty--;update()}
+function update(){
+ document.getElementById('q').innerText=qty;
+ document.getElementById('total').innerText=qty*price;
+}
+function addCart(){
+ document.getElementById('modal').style.display='none';
+ document.getElementById('success').style.display='block';
+}
+</script>
+
+</body>
+</html>
