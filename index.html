@@ -230,42 +230,45 @@ button{
 
 <script>
 let qty = 1;
-let price = 99;
+let currentPrice = 0; // Store the price of the active product
 
 function showSection(id){
- document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
 function openModal(product, p) {
     qty = 1;
-    price = p;
-
+    currentPrice = p; // Update global price for the Add to Cart calculation
     document.getElementById('modal').style.display = 'flex';
     document.getElementById('productName').innerText = product;
     document.getElementById('priceText').innerText = "₹" + p + " per pack";
-
-    update();
+    update(); // Call your update function to refresh the quantity display
 }
 
-function inc() {
-    qty++;
-    update();
-}
-
-function dec() {
-    if (qty > 1) qty--;
-    update();
-}
-
-function update() {
-    document.getElementById('q').innerText = qty;
-    document.getElementById('total').innerText = qty * price;
-}
-
-function addCart() {
+// 1. ADD THIS: Function to close the modal
+function closeModal() {
     document.getElementById('modal').style.display = 'none';
-    document.getElementById('success').style.display = 'block';
+}
+
+// 2. ADD THIS: Function to handle the 'Add to Cart' action
+function addToCart() {
+    const productName = document.getElementById('productName').innerText;
+    const total = qty * currentPrice;
+    
+    // For your project demo, an alert or console log works best
+    alert(`Added ${qty} ${productName}(s) to cart. Total: ₹${total}`);
+    
+    // Automatically close the modal after adding
+    closeModal();
+}
+
+// 3. YOUR UPDATE FUNCTION: Ensure this exists to refresh the UI
+function update() {
+    const qtyElement = document.getElementById('qtyText');
+    if(qtyElement) {
+        qtyElement.innerText = qty;
+    }
 }
 </script>
     
