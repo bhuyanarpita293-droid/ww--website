@@ -195,22 +195,26 @@ button{
 <div class="grid">
 <div class="card">
 <img src="https://thesustainabilityproject.life/shop/wp-content/uploads/sites/2/2021/07/Laundry-Sheets-4EM.jpg"><p>Laundry Sheets - ₹99 </p>
+<button onclick="openModal('Laundry Sheets', 99)">Buy Now</button>
 </div>
 <div class="card">
 <img src="https://thumbs.dreamstime.com/b/eco-friendly-cleaning-products-set-isolated-white-background-collection-eco-friendly-cleaning-products-sustainable-366008391.jpg"><p>Floor Cleaner - ₹149 </p>
+<button onclick="openModal('Floor Cleaner', 149)">Buy Now</button>
 </div>
 <div class="card">
 <img src="https://i.pinimg.com/736x/43/bb/aa/43bbaa3999088a173925b1c4c30e602f.jpg">
+<button onclick="openModal('Table Cleaner', 129)">Buy Now</button>
 <p>Table Cleaner - ₹129</p>
+
 </div>
 <div class="card">
 <img src="https://i.pinimg.com/736x/d5/90/ec/d590ec3c3cd4e1291b7649677b861b09.jpg">
+<button onclick="openModal('Dishwash Soap', 59)">Buy Now</button>
 <p>Dishwash Soap - ₹59</p>
 </div>
 </div>
 </div>
 </section>
-<button onclick="openModal()">Buy Now</button>
 </div>
 <!-- POPUP -->
 <div class="modal" id="modal">
@@ -224,13 +228,14 @@ button{
 <button onclick="inc()">+</button>
 </div>
 
-<p>Total ₹<span id="total">99</span></p>
-<button onclick="addCart()">Add to Cart</button>
-</div>
-</div>
-
+<script>
 let qty = 1;
 let price = 99;
+
+function showSection(id){
+ document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+}
 
 function openModal(product, p) {
     qty = 1;
@@ -262,15 +267,8 @@ function addCart() {
     document.getElementById('modal').style.display = 'none';
     document.getElementById('success').style.display = 'block';
 }
-
-<button onclick="openModal('Laundry Sheets', 99)">Buy Now</button>
-
-<button onclick="openModal('Floor Cleaner', 149)">Buy Now</button>
-
-<button onclick="openModal('Dishwash Soap', 119)">Buy Now</button>
-
-<button onclick="openModal('Table Cleaner', 159)">Buy Now</button>
-
+</script>
+    
 <!-- SUCCESS -->
 <div class="success" id="success">
 <h1>✅ Payment Successful</h1>
