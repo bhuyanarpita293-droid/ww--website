@@ -203,101 +203,122 @@ button{
 </div>
 <div class="card">
 <img src="https://i.pinimg.com/736x/43/bb/aa/43bbaa3999088a173925b1c4c30e602f.jpg">
-<button onclick="openModal('Table Cleaner', 129)">Buy Now</button>
 <p>Table Cleaner - ₹129</p>
-
+<button onclick="openModal('Table Cleaner', 129)">Buy Now</button>
 </div>
 <div class="card">
 <img src="https://i.pinimg.com/736x/d5/90/ec/d590ec3c3cd4e1291b7649677b861b09.jpg">
-<button onclick="openModal('Dishwash Soap', 59)">Buy Now</button>
 <p>Dishwash Soap - ₹59</p>
+<button onclick="openModal('Dishwash Soap', 59)">Buy Now</button>
 </div>
 </div>
 </div>
 </section>
 </div>
-<!-- POPUP -->
-<div class="modal" id="modal">
-<div class="modal-content">
-<h3 id="productName">Order</h3>
-<p id="priceText">₹99 per pack</p>
 
-<div class="qty">
-<button onclick="dec()">-</button>
-<span id="q">1</span>
-<button onclick="inc()">+</button>
+<div class="product-card">
+  <h3>Laundry Sheets</h3>
+  <p>₹99</p>
+  <button onclick="openPopup('Laundry Sheets',99)">Buy Now</button>
 </div>
 
+<div class="product-card">
+  <h3>Floor Cleaner</h3>
+  <p>₹149</p>
+  <button onclick="openPopup('Floor Cleaner',149)">Buy Now</button>
+</div>
+
+<div class="product-card">
+  <h3>Table Cleaner</h3>
+  <p>₹129</p>
+  <button onclick="openPopup('Table Cleaner',129)">Buy Now</button>
+</div>
+
+<div class="product-card">
+  <h3>Dishwash Soap</h3>
+  <p>₹59</p>
+  <button onclick="openPopup('Dishwash Soap',59)">Buy Now</button>
+</div>
+    
 <script>
-let qty = 1;
-let currentPrice = 0; // Store the price of the active product
 
-function showSection(id){
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+let quantity = 1;
+let currentProduct = {};
+const popup = document.getElementById("productPopup");
+
+// open popup
+function openPopup(name,price){
+
+quantity = 1;
+document.getElementById("quantity").innerText = quantity;
+
+document.getElementById("popupName").innerText = name;
+document.getElementById("popupPrice").innerText = price;
+
+currentProduct = {name,price};
+
+popup.style.display = "flex";
 }
 
-function openModal(product, p) {
-    qty = 1;
-    currentPrice = p; // Update global price for the Add to Cart calculation
-    document.getElementById('modal').style.display = 'flex';
-    document.getElementById('productName').innerText = product;
-    document.getElementById('priceText').innerText = "₹" + p + " per pack";
-    update(); // Call your update function to refresh the quantity display
+// quantity increase
+document.getElementById("plus").onclick=function(){
+quantity++;
+document.getElementById("quantity").innerText = quantity;
 }
 
-// 1. ADD THIS: Function to close the modal
-function closeModal() {
-    document.getElementById('modal').style.display = 'none';
+// quantity decrease
+document.getElementById("minus").onclick=function(){
+if(quantity>1){
+quantity--;
+document.getElementById("quantity").innerText = quantity;
+}
 }
 
-// 2. ADD THIS: Function to handle the 'Add to Cart' action
-function addToCart() {
-    const productName = document.getElementById('productName').innerText;
-    const total = qty * currentPrice;
-    
-    // For your project demo, an alert or console log works best
-    alert(`Added ${qty} ${productName}(s) to cart. Total: ₹${total}`);
-    
-    // Automatically close the modal after adding
-    closeModal();
+// add to cart
+document.getElementById("addCartBtn").onclick=function(){
+
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+cart.push({
+name:currentProduct.name,
+price:currentProduct.price,
+qty:quantity
+});
+
+localStorage.setItem("cart",JSON.stringify(cart));
+
+alert("Added to cart!");
+
+closePopup();
 }
 
-// 3. YOUR UPDATE FUNCTION: Ensure this exists to refresh the UI
-function update() {
-    const qtyElement = document.getElementById('qtyText');
-    if(qtyElement) {
-        qtyElement.innerText = qty;
-    }
+// close popup
+function closePopup(){
+popup.style.display="none";
 }
+
+// close on outside click
+window.onclick=function(e){
+if(e.target==popup){
+closePopup();
+}
+}
+
+// ESC key close
+document.addEventListener("keydown",function(e){
+if(e.key==="Escape"){
+closePopup();
+}
+});
+
 </script>
+
     
 <!-- SUCCESS -->
 <div class="success" id="success">
 <h1>✅ Payment Successful</h1>
 <p>Thank you for choosing WashWise!</p>
 </div>
-
-<script>
-let qty=1,price=99;
-
-function showSection(id){
- document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
- document.getElementById(id).classList.add('active');
-}
-
-function openModal(){document.getElementById('modal').style.display='flex'}
-function inc(){qty++;update()}
-function dec(){if(qty>1)qty--;update()}
-function update(){
- document.getElementById('q').innerText=qty;
- document.getElementById('total').innerText=qty*price;
-}
-function addCart(){
- document.getElementById('modal').style.display='none';
- document.getElementById('success').style.display='block';
-}
-</script>
 
 </body>
 </html>
