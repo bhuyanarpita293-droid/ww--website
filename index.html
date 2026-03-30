@@ -210,33 +210,66 @@ button{
 </div>
 </div>
 </section>
-
-<!-- PRICING -->
-<div class="card">
-<h2>Pricing</h2>
-<p>Laundry Sheets – ₹99</p>
-<p>Floor Cleaner – ₹149</p>
-<p>Dishwash Soap – ₹59</p>
-<p>Table Cleaner – ₹129</p>
 <button onclick="openModal()">Buy Now</button>
 </div>
 <!-- POPUP -->
 <div class="modal" id="modal">
 <div class="modal-content">
-<h3>Order</h3>
-<p>₹99 per pack</p>
-<p>₹149 per pack</p>
-<p>₹59 per pack</p>
-<p>₹129 per pack</p>
+<h3 id="productName">Order</h3>
+<p id="priceText">₹99 per pack</p>
+
 <div class="qty">
 <button onclick="dec()">-</button>
 <span id="q">1</span>
 <button onclick="inc()">+</button>
 </div>
+
 <p>Total ₹<span id="total">99</span></p>
 <button onclick="addCart()">Add to Cart</button>
 </div>
 </div>
+
+let qty = 1;
+let price = 99;
+
+function openModal(product, p) {
+    qty = 1;
+    price = p;
+
+    document.getElementById('modal').style.display = 'flex';
+    document.getElementById('productName').innerText = product;
+    document.getElementById('priceText').innerText = "₹" + p + " per pack";
+
+    update();
+}
+
+function inc() {
+    qty++;
+    update();
+}
+
+function dec() {
+    if (qty > 1) qty--;
+    update();
+}
+
+function update() {
+    document.getElementById('q').innerText = qty;
+    document.getElementById('total').innerText = qty * price;
+}
+
+function addCart() {
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('success').style.display = 'block';
+}
+
+<button onclick="openModal('Laundry Sheets', 99)">Buy Now</button>
+
+<button onclick="openModal('Floor Cleaner', 149)">Buy Now</button>
+
+<button onclick="openModal('Dishwash Soap', 119)">Buy Now</button>
+
+<button onclick="openModal('Table Cleaner', 159)">Buy Now</button>
 
 <!-- SUCCESS -->
 <div class="success" id="success">
